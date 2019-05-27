@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PopularLibs</string>
+    <string name="moxy_title">With Moxy</string>
+    <string name="no_moxy_title">Without Moxy</string>
+</resources>
