@@ -2,4 +2,7 @@
     <string name="app_name">PopularLibs</string>
     <string name="moxy_title">With Moxy</string>
     <string name="no_moxy_title">Without Moxy</string>
+    <string name="subscribe">Подписаться</string>
+    <string name="unsubscribe">Отписаться</string>
+    <string name="spam">Спам</string>
 </resources>
