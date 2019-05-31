@@ -13,21 +13,18 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".mvpnomoxy.NoMoxyActivity" />
         <activity android:name=".mvpmoxy.MoxyActivity" />
-
-        <activity android:name=".AsyncTaskActivity">
-
-        </activity>
-
-        <activity android:name=".observer.ObserverActivity">
-
-        </activity>
-
-        <activity android:name=".rx_java.RxJavaActivity">
+        <activity android:name=".AsyncTaskActivity" />
+        <activity android:name=".observer.ObserverActivity" />
+        <activity android:name=".rx_java.RxJavaActivity" />
+        <activity android:name=".RxJavaButterKnifeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".RxJavaButterKnifeSingleActivity">
+
         </activity>
     </application>
 
