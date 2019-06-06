@@ -5,4 +5,5 @@
     <string name="subscribe">Подписаться</string>
     <string name="unsubscribe">Отписаться</string>
     <string name="spam">Спам</string>
+    <string name="button">Button</string>
 </resources>
