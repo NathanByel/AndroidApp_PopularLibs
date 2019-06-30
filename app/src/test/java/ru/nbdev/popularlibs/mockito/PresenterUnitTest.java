@@ -33,76 +33,15 @@ public class PresenterUnitTest {
     public static void beforeClass() {
         System.out.println("beforeClass");
         RxAndroidPlugins.setInitMainThreadSchedulerHandler(schedulerCallable -> Schedulers.trampoline());
-
+        MockitoAnnotations.initMocks(PresenterUnitTest.class);
     }
 
     @Before
     public void before() {
         System.out.println("before");
-        MockitoAnnotations.initMocks(PresenterUnitTest.class);
+
         presenter = Mockito.spy(new MockitoPresenter());
 
-//        TestComponent component = DaggerTestComponent
-//                .builder()
-//                .testModule(new TestModule() {
-//                    @Override
-//                    public GitApi provideGitApi() {
-//                        GitApi gitApi = super.provideGitApi();
-//
-//                        /*Mockito.when(gitApi.loadUserData(Mockito.any()))
-//                                .thenAnswer(invocation -> {
-//                                    String arg = invocation.getArgument(0);
-//                                    switch (arg) {
-//                                        case "JakeWharton":
-//                                            return Observable.just(new UserData("http://JakeWharton"));
-//                                        case "SomeUser":
-//                                            return Observable.just(new UserData("http://SomeUser"));
-//                                        case "IncorrectUser":
-//                                            return Observable.just(new UserData("error"));
-//                                        default:
-//                                            return null;
-//                                    }
-//                                });*/
-//
-//                        Mockito.when(gitApi.loadUserData(Mockito.any()))
-//                                .thenReturn(Observable.just(new UserData("http://JakeWharton")));
-//
-//                        return gitApi;
-//                    }
-//                })
-//                .build();
-//
-//        component.inject(presenter);
-//        presenter.attachView(view);
-    }
-
-    @Test
-    public void test1() {
-        System.out.println("test1");
-        init();
-        presenter.onButtonClick("JakeWharton");
-        Mockito.verify(view).showUrl("http://JakeWharton");
-    }
-
-    @Test
-    public void test2() {
-        System.out.println("test2");
-        init();
-        presenter.onButtonClick("SomeUser");
-        //Mockito.verify(view).showUrl("http://SomeUser");
-        Mockito.verify(view).showUrl("http://JakeWharton");
-    }
-
-    @Test
-    public void test3() {
-        System.out.println("test3");
-        init();
-        presenter.onButtonClick("IncorrectUser");
-        //Mockito.verify(view).showUrl("http://IncorrectUser");
-        Mockito.verify(view).showUrl("http://JakeWharton");
-    }
-
-    private void init() {
         TestComponent component = DaggerTestComponent
                 .builder()
                 .testModule(new TestModule() {
@@ -110,23 +49,23 @@ public class PresenterUnitTest {
                     public GitApi provideGitApi() {
                         GitApi gitApi = super.provideGitApi();
 
-//                        Mockito.when(gitApi.loadUserData(Mockito.any()))
-//                                .thenAnswer(invocation -> {
-//                                    String arg = invocation.getArgument(0);
-//                                    switch (arg) {
-//                                        case "JakeWharton":
-//                                            return Observable.just(new UserData("http://JakeWharton"));
-//                                        case "SomeUser":
-//                                            return Observable.just(new UserData("http://SomeUser"));
-//                                        case "IncorrectUser":
-//                                            return Observable.just(new UserData("error"));
-//                                        default:
-//                                            return null;
-//                                    }
-//                                });
-
                         Mockito.when(gitApi.loadUserData(Mockito.any()))
-                                .thenReturn(Observable.just(new UserData("http://JakeWharton")));
+                                .thenAnswer(invocation -> {
+                                    String arg = invocation.getArgument(0);
+                                    switch (arg) {
+                                        case "JakeWharton":
+                                            return Observable.just(new UserData("http://JakeWharton"));
+                                        case "SomeUser":
+                                            return Observable.just(new UserData("http://SomeUser"));
+                                        case "":
+                                            return Observable.just(new UserData("error"));
+                                        default:
+                                            return null;
+                                    }
+                                });
+
+                        //Mockito.when(gitApi.loadUserData(Mockito.any()))
+                        //        .thenReturn(Observable.just(new UserData("http://JakeWharton")));
 
                         return gitApi;
                     }
@@ -135,5 +74,38 @@ public class PresenterUnitTest {
 
         component.inject(presenter);
         presenter.attachView(view);
+    }
+
+    @Test
+    public void test1_isCorrect() {
+        System.out.println("test1");
+        presenter.onButtonClick("JakeWharton");
+        someWait();
+        Mockito.verify(view).showUrl("http://JakeWharton");
+    }
+
+    @Test
+    public void test2_isCorrect() {
+        System.out.println("test2");
+        presenter.onButtonClick("SomeUser");
+        someWait();
+        Mockito.verify(view).showUrl("http://SomeUser");
+    }
+
+    @Test
+    public void test3_isCorrect() {
+        System.out.println("test3");
+        presenter.onButtonClick("");
+        someWait();
+        Mockito.verify(view).showUrl("error");
+    }
+
+
+    private void someWait() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

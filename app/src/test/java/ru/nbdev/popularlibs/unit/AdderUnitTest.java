@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 public class AdderUnitTest {
 
@@ -20,7 +21,7 @@ public class AdderUnitTest {
     }
 
     @Test
-    public void addition2_isCorrect() {
-        assertEquals(4, adder.wrongAdd(2, 2));
+    public void addition2_isIncorrect() {
+        assertNotEquals(4, adder.wrongAdd(2, 3));
     }
 }
