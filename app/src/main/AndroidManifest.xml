@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".mockito.app.App"
+        android:name=".leakCanary.LeakApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,18 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".mockito.view.MockitoActivity">
+        <activity android:name=".leakCanary.LeakActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".di.dagger.DaggerActivity">
+        <activity android:name=".mockito.view.MockitoActivity">
+
         </activity>
-        <activity android:name=".di.withDi.DiActivity"></activity>
-        <activity android:name=".di.withoutDi.NoDiActivity"></activity>
-        <activity android:name=".room.RoomActivity"></activity>
+        <activity android:name=".di.dagger.DaggerActivity"></activity>
+        <activity android:name=".di.withDi.DiActivity" />
+        <activity android:name=".di.withoutDi.NoDiActivity" />
+        <activity android:name=".room.RoomActivity" />
         <activity android:name=".mvpnomoxy.NoMoxyActivity" />
         <activity android:name=".mvpmoxy.MoxyActivity" />
         <activity android:name=".AsyncTaskActivity" />

@@ -15,6 +15,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            minifyEnabled true
+            multiDexEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -63,4 +70,6 @@ dependencies {
     androidTestAnnotationProcessor 'com.google.dagger:dagger-compiler:2.20'
 
     testImplementation 'org.mockito:mockito-core:2.2.6'
+
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.3'
 }
